@@ -26,7 +26,6 @@ def max_flow(c, s, t, bfs):
             f[u][v] += flow
             f[v][u] -= flow
             a = (u, v)
-
             if newlabels.get(a) is None:
                 flow *= -1
                 a = (v, u)
