@@ -36,10 +36,10 @@ def bfs(c, f, s, t):
         for v in range(len(c)):
             if (c[u][v] - f[u][v] > 0) and v not in paths:
                 paths[v] = paths[u] + [(u, v)]
-                print(paths)
                 if v == t:
                     return paths[v]
                 queue.append(v)
+    print(paths)
     return None
 
 
@@ -56,18 +56,20 @@ if __name__ == '__main__':
 
     start = 0  # A
     end = 5  # F
-    max_flow_value = max_flow(C, start, end)
-    print("Edmonds-Karp algorithm")
-    print("max_flow_value is: ", max_flow_value)
     A = np.matrix(C)
     n = len(C)
     G = nx.DiGraph(A)
-    pos = nx.spring_layout(G)
     labels = nx.get_edge_attributes(G, "weight")
-
     for i in labels:
         newlabels[i]={0:labels[i]}
-    print(newlabels)
+    max_flow_value = max_flow(C, start, end)
+    print("Edmonds-Karp algorithm")
+    print("max_flow_value is: ", max_flow_value)
+
+    pos = nx.spring_layout(G)
+
+
+
     nx.draw(G, pos, with_labels=True)
     nx.draw_networkx_edge_labels(G, pos, edge_labels=newlabels)
     plt.show()
