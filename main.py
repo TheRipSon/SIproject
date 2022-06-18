@@ -4,7 +4,12 @@
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 
 # Edmonds-Karp Algorithm
+import matplotlib
+
+matplotlib.use('TkAgg')
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import matplotlib.pyplot as plt
+import tkinter as tk
 import networkx as nx
 import numpy as np
 
@@ -75,8 +80,22 @@ def bfs(c, f, s, t):
     return None
 
 
+def build_graph(matrix, labels):
+    # global table
+    matrix = np.array(matrix)
+    f = plt.figure(figsize=(5, 4))
+    plt.axis('off')
+    G = nx.from_numpy_array(matrix)
+    pos = nx.circular_layout(G)
+    nx.draw(G, pos, with_labels=True)
+    nx.draw_networkx_edge_labels(G, pos, edge_labels=labels)
+    canvas = FigureCanvasTkAgg(f, master=root)
+    canvas.get_tk_widget().pack(side='bottom', fill='both', expand=1)  # ERROR Tk.
+
+
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
+    root = tk.Tk()
     # make a capacity graph
     #     s  1  2  3  4  5  6  t
     C = [[0, 8, 0, 5, 0, 1, 0, 0],  # s
@@ -99,8 +118,7 @@ if __name__ == '__main__':
     max_flow_value = max_flow(C, start, end, 0)
     print("Edmonds-Karp algorithm")
     print("max_flow_value is: ", max_flow_value)
-    pos = nx.spring_layout(G)
-    nx.draw(G, pos, with_labels=True)
-    nx.draw_networkx_edge_labels(G, pos, edge_labels=newlabels)
-    plt.show()
+    build_graph(A, newlabels)
+
+    root.mainloop()
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
