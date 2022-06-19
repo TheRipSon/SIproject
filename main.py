@@ -12,15 +12,16 @@ import matplotlib.pyplot as plt
 import tkinter as tk
 import networkx as nx
 import numpy as np
+import sys as sys
 
 newlabels = {}
 
 
-def max_flow(c, s, t, bfs):
+def max_flow(c, s, t, metod):
     f = [[0] * n for i in range(n)]
     i = 1
     print(f"Sciezka: {i}")
-    if bfs:
+    if metod == 1:
         path = bfs(c, f, s, t)
     else:
         path = dfs(c, f, s, t)
@@ -95,6 +96,14 @@ def build_graph(matrix, labels):
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
+    args = sys.argv[1:]
+    if len(args) == 0:
+        exit("No algoritm selected")
+    metod=1
+    if args[0] == 'FF':
+        metod = 1
+    if args[0] == 'EK':
+        metod = 0
     root = tk.Tk()
 
     with open('input.txt', 'r') as q:
@@ -109,8 +118,11 @@ if __name__ == '__main__':
     labels = nx.get_edge_attributes(G, "weight")
     for i in labels:
         newlabels[i] = {labels[i]: 0}
-    max_flow_value = max_flow(C, start, end, 0)
-    print("Edmonds-Karp algorithm")
+    max_flow_value = max_flow(C, start, end, metod)
+    if metod == 1:
+        print("Edmonds-Karp algorithm")
+    else:
+        print("Ford-Fulkerson algorithm")
     print("max_flow_value is: ", max_flow_value)
     build_graph(A, newlabels)
 
