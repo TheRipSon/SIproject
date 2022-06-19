@@ -101,9 +101,9 @@ if __name__ == '__main__':
         exit("No algoritm selected")
     metod=1
     if args[0] == 'FF':
-        metod = 0
-    if args[0] == 'EK':
         metod = 1
+    if args[0] == 'EK':
+        metod = 0
     root = tk.Tk()
 
     with open('input.txt', 'r') as q:
@@ -120,9 +120,9 @@ if __name__ == '__main__':
         newlabels[i] = {labels[i]: 0}
     max_flow_value = max_flow(C, start, end, metod)
     if metod == 1:
-        print("Edmonds-Karp algorithm")
-    else:
         print("Ford-Fulkerson algorithm")
+    else:
+        print("Edmonds-Karp algorithm")
     print("max_flow_value is: ", max_flow_value)
     build_graph(A, newlabels)
 
