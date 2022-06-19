@@ -101,9 +101,9 @@ if __name__ == '__main__':
         exit("No algoritm selected")
     metod=1
     if args[0] == 'FF':
-        metod = 1
-    if args[0] == 'EK':
         metod = 0
+    if args[0] == 'EK':
+        metod = 1
     root = tk.Tk()
 
     with open('input.txt', 'r') as q:
