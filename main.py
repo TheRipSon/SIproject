@@ -1,9 +1,3 @@
-# This is a sample Python script.
-
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-# Edmonds-Karp Algorithm
 import matplotlib
 
 matplotlib.use('TkAgg')
@@ -94,12 +88,11 @@ def build_graph(matrix, labels):
     canvas.get_tk_widget().pack(side='bottom', fill='both', expand=1)  # ERROR Tk.
 
 
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     args = sys.argv[1:]
     if len(args) == 0:
         exit("No algoritm selected")
-    metod=1
+    metod = 1
     if args[0] == 'FF':
         metod = 1
     if args[0] == 'EK':
@@ -127,4 +120,3 @@ if __name__ == '__main__':
     build_graph(A, newlabels)
 
     root.mainloop()
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
